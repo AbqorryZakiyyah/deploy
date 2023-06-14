@@ -1,7 +1,21 @@
-Flask==2.0.1
-Flask_SQLAlchemy==2.5.1
-google-cloud-translate==3.5.1
-tensorflow==2.5.0
-pandas==1.2.5
-scikit-learn==0.24.2
-spacy==3.1.3
+# Menggunakan base image Python
+FROM python:3.8
+
+# Mengatur environment variable
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Mengatur direktori kerja
+WORKDIR /app
+
+# Menyalin requirements.txt ke dalam container
+COPY requirements.txt .
+
+# Menginstal dependensi
+RUN pip install -r requirements.txt
+
+# Menyalin seluruh kode ke dalam container
+COPY . .
+
+# Menjalankan aplikasi Flask
+CMD ["python", "app.py"]
